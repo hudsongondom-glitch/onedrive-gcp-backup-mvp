@@ -9,6 +9,7 @@ const authRoutes = require('./routes/auth');
 const onedriveRoutes = require('./routes/onedrive');
 const backupRoutes = require('./routes/backup');
 const restoreRoutes = require('./routes/restore');
+const logsRoutes = require('./routes/logs');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use('/auth', authRoutes);
 app.use('/onedrive', onedriveRoutes);
 app.use('/backup', backupRoutes);
 app.use('/restore', restoreRoutes);
+app.use('/logs', logsRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
