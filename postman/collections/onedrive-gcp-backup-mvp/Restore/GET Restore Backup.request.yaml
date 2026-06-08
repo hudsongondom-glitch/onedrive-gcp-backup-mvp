@@ -1,0 +1,12 @@
+$kind: http-request
+name: GET Restore Backup
+method: GET
+url: '{{baseUrl}}/restore/:backupId'
+order: 1000
+description: 'Fetches backup details and returns download/restore info for a given backup. **Not yet implemented** — returns 501.'
+headers:
+  - key: x-session-id
+    value: '{{sessionId}}'
+pathVariables:
+  - key: backupId
+    value: BACKUP_ID_HERE

@@ -1,0 +1,9 @@
+$kind: environment
+name: Local Development
+variables:
+  - key: baseUrl
+    value: 'http://localhost:8080'
+    type: default
+  - key: sessionId
+    value: ''
+    type: default

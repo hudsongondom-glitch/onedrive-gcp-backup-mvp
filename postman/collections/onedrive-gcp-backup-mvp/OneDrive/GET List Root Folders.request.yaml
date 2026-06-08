@@ -1,0 +1,9 @@
+$kind: http-request
+name: GET List Root Folders
+method: GET
+url: '{{baseUrl}}/onedrive/folders'
+order: 1000
+description: Lists the root-level folders in the authenticated user's OneDrive.
+headers:
+  - key: x-session-id
+    value: '{{sessionId}}'

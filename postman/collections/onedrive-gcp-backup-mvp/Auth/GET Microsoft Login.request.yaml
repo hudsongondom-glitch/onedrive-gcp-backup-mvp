@@ -1,0 +1,8 @@
+$kind: http-request
+name: GET Microsoft Login
+method: GET
+url: '{{baseUrl}}/auth/microsoft/login'
+order: 1000
+description: Redirects the user to the Microsoft OAuth2 login page.
+auth:
+  type: noauth

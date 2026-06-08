@@ -1,0 +1,9 @@
+$kind: http-request
+name: GET Backup History
+method: GET
+url: '{{baseUrl}}/backup/history'
+order: 2000
+description: 'Fetches the backup history for the authenticated user. **Not yet implemented** — returns 501.'
+headers:
+  - key: x-session-id
+    value: '{{sessionId}}'

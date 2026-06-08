@@ -1,0 +1,13 @@
+$kind: http-request
+name: GET Microsoft Callback
+method: GET
+url: '{{baseUrl}}/auth/microsoft/callback'
+order: 2000
+description: 'OAuth2 callback endpoint. Exchanges the authorization code for a session. Returns sessionId and user profile.'
+auth:
+  type: noauth
+queryParams:
+  - key: code
+    value: AUTH_CODE_HERE
+  - key: state
+    value: STATE_VALUE

@@ -1,0 +1,7 @@
+$kind: collection
+name: OneDrive GCP Backup MVP
+variables:
+  - key: baseUrl
+    value: 'http://localhost:8080'
+  - key: sessionId
+    value: ''

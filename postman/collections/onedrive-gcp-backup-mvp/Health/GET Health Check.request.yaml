@@ -1,0 +1,8 @@
+$kind: http-request
+name: GET Health Check
+method: GET
+url: '{{baseUrl}}/health'
+order: 1000
+description: Returns the health status of the backend service.
+auth:
+  type: noauth

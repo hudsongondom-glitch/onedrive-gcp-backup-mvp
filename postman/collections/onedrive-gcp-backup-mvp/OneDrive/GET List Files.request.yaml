@@ -1,0 +1,9 @@
+$kind: http-request
+name: GET List Files
+method: GET
+url: '{{baseUrl}}/onedrive/files'
+order: 3000
+description: 'Lists files within a folder. **Not yet implemented** — returns 501.'
+headers:
+  - key: x-session-id
+    value: '{{sessionId}}'
