@@ -1,6 +1,7 @@
 const express = require('express');
 const AuthService = require('../services/AuthService');
 const BackupService = require('../services/BackupService');
+const FirestoreService = require('../services/FirestoreService');
 
 const router = express.Router();
 
@@ -39,9 +40,18 @@ router.post('/start', async (req, res, next) => {
 });
 
 // GET /backup/history
-router.get('/history', async (req, res) => {
-  // TODO: fetch backup history via FirestoreService
-  res.status(501).json({ message: 'Not implemented' });
+router.get('/history', async (req, res, next) => {
+  try {
+    const session = getSessionOrFail(req, res);
+    if (!session) return;
+
+    const userId = (session.account && (session.account.id || session.account.userPrincipalName)) || 'unknown';
+    const history = await FirestoreService.getBackupHistory(userId);
+
+    res.status(200).json({ history });
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = router;
