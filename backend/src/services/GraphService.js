@@ -49,15 +49,33 @@ class GraphService {
     }));
   }
 
+  /**
+   * Lists the files (non-folder items) directly inside a OneDrive folder.
+   */
+  async listFilesInFolder(accessToken, folderId) {
+    const response = await axios.get(`${msConfig.graphBaseUrl}/me/drive/items/${folderId}/children`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    return this._mapItems(response.data.value).filter((item) => !!item.file);
+  }
+
+  /**
+   * Downloads a file's binary content as a Buffer.
+   * GET /me/drive/items/{fileId}/content
+   */
+  async downloadFile(accessToken, fileId) {
+    const response = await axios.get(`${msConfig.graphBaseUrl}/me/drive/items/${fileId}/content`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+      responseType: 'arraybuffer',
+    });
+    return Buffer.from(response.data);
+  }
+
   async listFolders(accessToken, parentId) {
     throw new Error('Not implemented');
   }
 
   async listFiles(accessToken, folderId) {
-    throw new Error('Not implemented');
-  }
-
-  async downloadFile(accessToken, fileId) {
     throw new Error('Not implemented');
   }
 }
