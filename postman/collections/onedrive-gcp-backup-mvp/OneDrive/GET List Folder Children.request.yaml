@@ -1,12 +1,10 @@
 $kind: http-request
 name: GET List Folder Children
 method: GET
-url: '{{baseUrl}}/onedrive/folders/:folderId'
+url: "{{baseUrl}}/onedrive/folders/:folderId"
 order: 2000
 description: Lists the children (files and subfolders) of a specific OneDrive folder.
 headers:
-  - key: x-session-id
-    value: '{{sessionId}}'
+  x-session-id: "{{sessionId}}"
 pathVariables:
-  - key: folderId
-    value: FOLDER_ID_HERE
+  folderId: 01FS2YUVLOLV6GHNP32RBKMZ2NBZSYDQAB

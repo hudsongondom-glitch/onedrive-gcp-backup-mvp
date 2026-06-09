@@ -1,13 +1,12 @@
 $kind: http-request
 name: POST Start Backup
 method: POST
-url: '{{baseUrl}}/backup/start'
+url: "{{baseUrl}}/backup/start"
 order: 1000
-description: 'Triggers a backup of the user''s OneDrive to GCP. **Not yet implemented** — returns 501.'
+description: Triggers a backup of the user's OneDrive to GCP. **Not yet implemented** — returns 501.
 headers:
-  - key: x-session-id
-    value: '{{sessionId}}'
+  x-session-id: "{{sessionId}}"
+  Content-Type: application/json
 body:
   type: json
-  content: |-
-    {}
+  content: '{"folderId" : "01FS2YUVLOLV6GHNP32RBKMZ2NBZSYDQAB"}'

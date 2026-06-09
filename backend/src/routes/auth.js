@@ -24,9 +24,10 @@ router.get('/microsoft/callback', async (req, res, next) => {
       return res.status(400).json({ error: 'Invalid or expired state parameter' });
     }
 
-    const { sessionId, profile } = await AuthService.handleCallback(code);
+    const { sessionId } = await AuthService.handleCallback(code);
 
-    res.status(200).json({ sessionId, profile });
+    const env = require('../config/env');
+    return res.redirect(`${env.frontendUrl}/auth/callback?sessionId=${encodeURIComponent(sessionId)}`);
   } catch (err) {
     next(err);
   }
