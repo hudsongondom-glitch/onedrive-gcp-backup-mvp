@@ -1,5 +1,4 @@
 // Configuration for Microsoft Graph API / OAuth 2.0 Authorization Code Flow.
-// No OAuth logic lives here yet — values are read by AuthService / GraphService later.
 
 const microsoftGraphConfig = {
   clientId: process.env.MICROSOFT_CLIENT_ID || '',
