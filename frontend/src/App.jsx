@@ -1,5 +1,7 @@
 import { Navigate, Route, Routes, Link, useNavigate, useLocation } from 'react-router-dom';
 import { clearSessionId, getSessionId, api } from './api/client';
+import { FaMicrosoft } from "react-icons/fa";
+import { RefreshCw } from "lucide-react";
 
 import LoginPage from './pages/LoginPage';
 import AuthCallbackPage from './pages/AuthCallbackPage';
@@ -32,20 +34,28 @@ function NavBar() {
   }
 
   return (
-    <nav>
-      <Link to="/dashboard" className="nav-brand">☁ OneDrive Backup</Link>
-      <Link to="/dashboard" className={active('/dashboard')}>Dashboard</Link>
-      <Link to="/backup"    className={active('/backup')}>Backup</Link>
-      <Link to="/history"   className={active('/history')}>History</Link>
-      <Link to="/restore"   className={active('/restore')}>Restore</Link>
-      <span className="nav-spacer" />
-      <button className="nav-action" onClick={handleReconnect} title="Restart Microsoft OAuth login">
-        🔁 Reconnect Account
-      </button>
-      <button className="nav-action" onClick={handleLogout} style={{ marginLeft: 8 }}>
-        Sign out
-      </button>
-    </nav>
+  <nav>
+<Link to="/dashboard" className="nav-brand">
+  <FaMicrosoft
+    size={20}
+    color="#0078D4"
+    style={{ marginRight: 8 }}
+  />
+  OneDrive Backup
+</Link>
+    <Link to="/dashboard" className={active('/dashboard')}>Dashboard</Link>
+    <Link to="/backup"    className={active('/backup')}>Backup</Link>
+    <Link to="/history"   className={active('/history')}>History</Link>
+    <Link to="/restore"   className={active('/restore')}>Restore</Link>
+    <span className="nav-spacer" />
+    <button className="nav-action" onClick={handleReconnect} title="Restart Microsoft OAuth login">
+      <RefreshCw size={16} style={{ marginRight: 6 }} />
+      Reconnect Account
+    </button>
+    <button className="nav-action" onClick={handleLogout} style={{ marginLeft: 8 }}>
+      Sign out
+    </button>
+  </nav>
   );
 }
 
