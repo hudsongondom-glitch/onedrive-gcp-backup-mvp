@@ -14,8 +14,12 @@ class StorageService {
     return destinationPath;
   }
 
-  async getDownloadUrl(objectPath) {
-    throw new Error('Not implemented');
+  /**
+   * Returns a readable stream for the given GCS object path.
+   * The caller is responsible for piping it to the HTTP response.
+   */
+  createReadStream(objectPath) {
+    return bucket.file(objectPath).createReadStream();
   }
 }
 

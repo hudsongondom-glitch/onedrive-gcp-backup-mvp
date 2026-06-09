@@ -46,8 +46,37 @@ async function request(path, options = {}) {
 export const api = {
   loginUrl: () => `${API_BASE_URL}/auth/microsoft/login`,
   getFolders: () => request('/onedrive/folders'),
+  getFolderChildren: (folderId) => request(`/onedrive/folders/${encodeURIComponent(folderId)}`),
   startBackup: (folderId) =>
     request('/backup/start', { method: 'POST', body: JSON.stringify({ folderId }) }),
   getHistory: () => request('/backup/history'),
   getRestore: (backupId) => request(`/restore/${encodeURIComponent(backupId)}`),
+
+  /**
+   * Fetches a single backed-up file as a Blob and triggers a browser download.
+   * Uses fetch (not a plain anchor) so the x-session-id header is included.
+   */
+  async downloadFile(backupId, fileId, filename) {
+    const sessionId = getSessionId();
+    const response = await fetch(
+      `${API_BASE_URL}/restore/file/${encodeURIComponent(backupId)}/${encodeURIComponent(fileId)}`,
+      { headers: { ...(sessionId ? { 'x-session-id': sessionId } : {}) } }
+    );
+
+    if (!response.ok) {
+      let msg = `Download failed (${response.status})`;
+      try { const b = await response.json(); msg = b.error || msg; } catch (_) {}
+      throw new Error(msg);
+    }
+
+    const blob = await response.blob();
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = filename || fileId;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  },
 };
