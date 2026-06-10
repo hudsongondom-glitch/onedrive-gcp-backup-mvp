@@ -1,6 +1,9 @@
 // Minimal fetch-based API client. Keeps the MVP free of extra HTTP libraries.
 
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'DIAGNOSTIC_STRING_HUDSON';
+// Resolve the API base URL and strip any trailing slash so that joining with a
+// leading-slash path (e.g. `/onedrive/folders`) never produces a double slash.
+const RAW_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+export const API_BASE_URL = RAW_API_BASE_URL.replace(/\/+$/, '');
 
 export const SESSION_KEY = 'sessionId';
 
